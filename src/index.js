@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { ApolloProvider } from 'react-apollo';
 import './index.css';
 import App from './App';
+import ApolloClient from './lib/apollo-client';
 import routes from './routes'
 import * as serviceWorker from './serviceWorker';
 
 const DemoApp = () => (
-  <Router>
-    <App routes={routes} />
-  </Router>
+  <ApolloProvider client={ApolloClient}>
+    <Router>
+      <App routes={routes} />
+    </Router>
+  </ApolloProvider>
 );
 
 ReactDOM.render(<DemoApp />, document.getElementById('root'));

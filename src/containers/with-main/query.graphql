@@ -1,0 +1,6 @@
+query Main {
+  continents {
+    name
+    code
+  }
+}
