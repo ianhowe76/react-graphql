@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import CountryInfo from '../components/country-info';
 import withCountry from '../containers/with-country';
+import PageContainer from '../components/page-container/page-container';
 
 const CountryPage = ({ loading, error, country }) => {
   let content = null;
@@ -21,10 +22,10 @@ const CountryPage = ({ loading, error, country }) => {
   }
 
   return (
-    <div>
-      <div>Country Page</div>
+    <PageContainer>
+      <h1>Country Page</h1>
       {content}
-    </div>
+    </PageContainer>
   );
 };
 

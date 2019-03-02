@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import withMain from '../containers/with-main';
+import withContinentList from '../containers/with-continent-list';
+import PageContainer from '../components/page-container/page-container';
 
 const HomePage = ({ loading, error, continents }) => {
   let content = null;
@@ -27,10 +28,10 @@ const HomePage = ({ loading, error, continents }) => {
   }
 
   return (
-    <div>
-      <div>Home Page</div>
+    <PageContainer>
+      <h1>The Continents</h1>
       {content}
-    </div>
+    </PageContainer>
   );
 };
 
@@ -40,4 +41,4 @@ HomePage.propTypes = {
   continents: PropTypes.arrayOf(PropTypes.object),
 };
 
-export default withMain(HomePage);
+export default withContinentList(HomePage);

@@ -3,7 +3,7 @@ import { graphql } from 'react-apollo'
 
 // TODO: Add graphql-tag/loader and import query.graphql
 const query = ggl`
-  query Main {
+  query Continents {
     continents {
       name
       code
@@ -25,8 +25,8 @@ const mapDataToProps = ({ data }) => {
   };
 };
 
-const withMain = graphql(query, {
+const withContinentList = graphql(query, {
   props: mapDataToProps,
 });
 
-export default withMain;
+export default withContinentList;

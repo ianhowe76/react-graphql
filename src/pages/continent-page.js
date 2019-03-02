@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import withContinent from '../containers/with-continent';
+import PageContainer from '../components/page-container/page-container';
 
 const ContinentPage = ({ loading, error, continent }) => {
   let content = null;
@@ -13,7 +14,7 @@ const ContinentPage = ({ loading, error, continent }) => {
   } else {
     content = (
       <Fragment>
-        <p>{continent.name}</p>
+        <h2>{continent.name}</h2>
         <ul>
           {
             continent.countries.map(country => (
@@ -28,10 +29,11 @@ const ContinentPage = ({ loading, error, continent }) => {
   }
 
   return (
-    <div>
-      <div>Continent Page</div>
+    <PageContainer>
+      <h1>Continent Page</h1>
       {content}
-    </div>
+      <Link to="/">Home</Link>
+    </PageContainer>
   );
 };
 
