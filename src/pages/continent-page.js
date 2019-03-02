@@ -17,7 +17,7 @@ const ContinentPage = ({ loading, error, continent }) => {
         <ul>
           {
             continent.countries.map(country => (
-              <li>
+              <li key={country.code}>
                 <Link to={`/country/${country.code}`}>{country.name}</Link>
               </li>
             ))
@@ -36,7 +36,9 @@ const ContinentPage = ({ loading, error, continent }) => {
 };
 
 ContinentPage.propTypes = {
-  match: PropTypes.object.isRequired,
+  loading: PropTypes.bool,
+  error: PropTypes.object,
+  continent: PropTypes.object,
 };
 
 export default withContinent(ContinentPage);

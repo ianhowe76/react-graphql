@@ -3,16 +3,22 @@ import { graphql } from 'react-apollo'
 
 // TODO: Add graphql-tag/loader and import query.graphql
 const query = ggl`
-  query Continent ($code:String) {
-    continent(code:$code) {
+  query Country ($code:String) {
+    country(code:$code) {
       name
       code
-      countries {
-        code
+      native
+      phone
+      currency
+      emoji
+      languages {
         name
       }
+      continent {
+        code
+      }
     }
-  }
+  } 
 `
 
 const mapPropsToOptions = ({ match }) => ({
@@ -22,7 +28,7 @@ const mapPropsToOptions = ({ match }) => ({
 });
 
 const mapDataToProps = ({ data }) => {
-  const { loading, error, continent } = data;
+  const { loading, error, country } = data;
 
   if (error) {
     return { error };
@@ -31,13 +37,16 @@ const mapDataToProps = ({ data }) => {
   }
 
   return {
-    continent: {...continent},
+    country: {
+      ...country,
+      languages: country.languages.map(lang => lang.name),
+    },
   };
 };
 
-const withContinent = graphql(query, {
+const withCountry = graphql(query, {
   options: mapPropsToOptions,
   props: mapDataToProps,
 });
 
-export default withContinent;
+export default withCountry;

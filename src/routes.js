@@ -1,4 +1,5 @@
 import HomePage from './pages/home-page';
+import CountryPage from './pages/country-page';
 import ContinentPage from './pages/continent-page';
 
 const routes = [
@@ -10,6 +11,10 @@ const routes = [
   {
     path: '/continent/:code',
     component: ContinentPage,
+  },
+  {
+    path: '/country/:code',
+    component: CountryPage,
   },
 ];
 
