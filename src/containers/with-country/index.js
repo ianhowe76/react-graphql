@@ -1,5 +1,7 @@
-import ggl from 'graphql-tag'
-import { graphql } from 'react-apollo'
+// This is an example of creating a HOC using the apollo <Query /> component
+import React, { Component } from 'react';
+import ggl from 'graphql-tag';
+import { Query } from 'react-apollo';
 
 // TODO: Add graphql-tag/loader and import query.graphql
 const query = ggl`
@@ -21,32 +23,37 @@ const query = ggl`
   } 
 `
 
-const mapPropsToOptions = ({ match }) => ({
-  variables: {
-    code: match.params.code,
-  },
-});
+const buildCountryFromData = data => data && data.country ? ({
+  ...data.country,
+  languages: data.country.languages.map(lang => lang.name),
+}) : null;
 
-const mapDataToProps = ({ data }) => {
-  const { loading, error, country } = data;
+const withCountry = WrappedComponent => {
+  class WithCountry extends Component {
+    render() {
+      const variables = {
+        code: this.props.match.params.code,
+      };
 
-  if (error) {
-    return { error };
-  } else if (loading) {
-    return { loading: true };
+      return (
+        <Query query={query} variables={variables}>
+          {
+            ({ loading, error, data }) => {
+              return (
+                <WrappedComponent
+                  loading={loading}
+                  error={error}
+                  country={buildCountryFromData(data)}
+                />
+              );
+            }
+          }
+        </Query>
+      )
+    }
   }
 
-  return {
-    country: {
-      ...country,
-      languages: country.languages.map(lang => lang.name),
-    },
-  };
+  return WithCountry;
 };
-
-const withCountry = graphql(query, {
-  options: mapPropsToOptions,
-  props: mapDataToProps,
-});
 
 export default withCountry;

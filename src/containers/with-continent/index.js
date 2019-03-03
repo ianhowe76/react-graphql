@@ -1,3 +1,4 @@
+// This is an example of creating a HOC using the apollo graphql function
 import ggl from 'graphql-tag'
 import { graphql } from 'react-apollo'
 
