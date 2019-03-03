@@ -1,15 +1,5 @@
-import ggl from 'graphql-tag'
-import { graphql } from 'react-apollo'
-
-// TODO: Add graphql-tag/loader and import query.graphql
-const query = ggl`
-  query Continents {
-    continents {
-      name
-      code
-    }
-  }
-`
+import { graphql } from 'react-apollo';
+import query from './query.graphql';
 
 const mapDataToProps = ({ data }) => {
   const { loading, error, continents } = data;

@@ -1,4 +1,4 @@
-query Main {
+query Continents {
   continents {
     name
     code
